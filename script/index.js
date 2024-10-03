@@ -59,7 +59,7 @@ const displayVideos = async (videos) => {
 	  ${
 			video.others.posted_date?.length === 0
 				? ""
-				: ` <span class="absolute right-2 bottom-2  bg-black text-white rounded p-1">${getTimeString(
+				: ` <span class="absolute text-xs right-2 bottom-2  bg-black text-white rounded p-1">${getTimeString(
 						video.others.posted_date
 				  )}</span>`
 		}
