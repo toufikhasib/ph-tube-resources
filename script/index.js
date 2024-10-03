@@ -9,20 +9,20 @@ const loadCategories = async () => {
 		}
 		const data = await res.json();
 		await displayCategories(data.categories);
+		// console.log(data);
 	} catch (error) {
 		console.error("Error loading categories:", error);
 		alert("Failed to load categories. Please try again later.");
 	}
 };
-
 const displayCategories = async (categoriesData) => {
 	const containeer = document.getElementById("categories-content");
 	categoriesData.forEach((item) => {
-		// console.log(item);
-		const button = document.createElement("button");
-		button.classList = "btn";
-		button.innerText = item.category;
-		containeer.appendChild(button);
+		const buttonContainer = document.createElement("div");
+		buttonContainer.innerHTML = `
+		<button class="btn" onclick="buttonLoadCategories(${item.category_id})">${item.category}<button/>
+		`;
+		containeer.appendChild(buttonContainer);
 	});
 };
 // Call loadCategories to fetch and display categories
@@ -46,8 +46,23 @@ const loadVideos = async () => {
 };
 const displayVideos = async (videos) => {
 	const videoContent = document.getElementById("videos");
+	videoContent.innerHTML = "";
+
+	if (videos.length === 0) {
+		videoContent.classList.remove("grid");
+		videoContent.innerHTML = `
+		<div class="m-h-[300px] flex flex-col justify-center items-center gap-5">
+		<img src="image/Icon.png" alt="logo image" />
+		<h2 class="text-center text-xl font-bold">Oops!! Sorry, There is no content here</h2/>
+		</div>
+		
+		`;
+		return;
+	} else {
+		videoContent.classList.add("grid");
+	}
 	videos.forEach((video) => {
-		console.log(video);
+		// console.log(video);
 		const card = document.createElement("div");
 		card.classList = "card card-compact ";
 		card.innerHTML = `

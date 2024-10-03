@@ -35,3 +35,21 @@ function getTimeString(time) {
 	}
 	return result.trim();
 }
+// button function
+const buttonLoadCategories = async (id) => {
+	// alert(id);
+	try {
+		const res = await fetch(
+			`https://openapi.programming-hero.com/api/phero-tube/category/${id}`
+		);
+		if (!res.ok) {
+			throw new Error(`Network response was not ok`);
+		}
+		const data = await res.json();
+		await displayVideos(data.category);
+		// console.log(data.category);
+	} catch (error) {
+		console.error("Error loading categories:", error);
+		alert("Failed to load categories. Please try again later.");
+	}
+};
