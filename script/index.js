@@ -20,7 +20,7 @@ const displayCategories = async (categoriesData) => {
 	categoriesData.forEach((item) => {
 		const buttonContainer = document.createElement("div");
 		buttonContainer.innerHTML = `
-		<button class="btn" onclick="buttonLoadCategories(${item.category_id})">${item.category}<button/>
+		<button id="btn${item.category_id}" class="btn btn-category" onclick="buttonLoadCategories(${item.category_id})">${item.category}<button/>
 		`;
 		containeer.appendChild(buttonContainer);
 	});

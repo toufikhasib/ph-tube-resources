@@ -46,10 +46,25 @@ const buttonLoadCategories = async (id) => {
 			throw new Error(`Network response was not ok`);
 		}
 		const data = await res.json();
-		await displayVideos(data.category);
+		await (async () => {
+			// button remove call
+			buttonRemoveCalla();
+			// button active call
+			const activeButton = document.getElementById(`btn${id}`);
+			activeButton.classList.add("active");
+			await displayVideos(data.category);
+		})();
+		// await  displayVideos(data.category);
 		// console.log(data.category);
 	} catch (error) {
 		console.error("Error loading categories:", error);
 		alert("Failed to load categories. Please try again later.");
+	}
+};
+// buttonRemoveCalla function
+const buttonRemoveCalla = () => {
+	const removeButton = document.getElementsByClassName("btn-category");
+	for (let btn of removeButton) {
+		btn.classList.remove("active");
 	}
 };
